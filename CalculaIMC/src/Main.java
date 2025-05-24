@@ -28,28 +28,27 @@ public class Main {
 
         // metodo pra salvar no mysql worbench
         salvarNoBanco(nome, peso, altura, imc);
-        }
-        public static void salvarNoBanco(String nome, double peso, double altura, double imc) {
-            String url = "jdbc:mysql://localhost:3306/CalculaIMC";
-            String usuario = "root";
-            String senha = "123456";
-            Connection conn = DriverManager.getConnection(url, usuario, senha);
+    }
 
-            String sql = "INSERT INTO pessoa (nome, peso, altura, imc) VALUES (?, ?, ?, ?)";
+    public static void salvarNoBanco(String nome, double peso, double altura, double imc) {
+        String url = "jdbc:mysql://localhost:3306/CalculaIMC";
+        String usuario = "root";
+        String senha = "123456";
+        String sql = "INSERT INTO pessoa (nome, peso, altura, imc) VALUES (?, ?, ?, ?)";
 
-            try (Connection conn = DriverManager.getConnection(url, usuario, senha);
-                 PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DriverManager.getConnection(url, usuario, senha);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-                stmt.setString(1, nome);
-                stmt.setDouble(2, peso);
-                stmt.setDouble(3, altura);
-                stmt.setDouble(4, imc);
+            stmt.setString(1, nome);
+            stmt.setDouble(2, peso);
+            stmt.setDouble(3, altura);
+            stmt.setDouble(4, imc);
 
-                stmt.executeUpdate();
-                System.out.println("Dados salvos com sucesso!");
+            stmt.executeUpdate();
+            System.out.println("Dados salvos com sucesso!");
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+}
